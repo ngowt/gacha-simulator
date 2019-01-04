@@ -11,14 +11,12 @@ async function getCardSet(req, res) {
             cardset_id: req.params.id
         });
         if (!cardset) {
-            console.log("No documents existing in DB, calling valve cardset API");
             let result = await axios.get(`https://playartifact.com/cardset/${req.params.id}/`);
             result.data.cardset_id = req.params.id;
             cardSet = new CardSet(result.data);
             await cardSet.save();
         } else {
             if (Date.now() >= new Date(cardset.expire_time * 1000)) {
-                console.log("Document expired, calling valve cardset API");
                 let result = await axios.get(`https://playartifact.com/cardset/${req.params.id}/`);
                 result.data.cardset_id = req.params.id;
                 cardSet = new CardSet(result.data);
