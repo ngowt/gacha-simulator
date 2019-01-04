@@ -2,9 +2,10 @@
   "name": "artifact-gacha",
   "version": "1.0.0",
   "description": "All the fun of opening artifact card packs without the money",
-  "main": "index.js",
+  "main": "./backend/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test jest --watchAll --verbose --coverage",
+    "start": "node ./backend/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,10 @@
   },
   "homepage": "https://github.com/ngowt/artifact-gacha#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "axios": "^0.18.0",
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.2"
   },
   "devDependencies": {
     "jest": "^23.6.0",
