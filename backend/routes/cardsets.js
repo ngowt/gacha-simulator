@@ -11,7 +11,6 @@ async function getCardSet(req, res) {
             cardset_id: req.params.id
         });
         if (!cardset) {
-            console.log("Does not exist in mongodb database, calling valve's endpoint!");
             const result = await axios.get(`https://playartifact.com/cardset/${req.params.id}/`);
             result.data.cardset_id = req.params.id;
             cardSet = new CardSet(result.data);
