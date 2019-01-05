@@ -1,5 +1,5 @@
 const express = require('express');
-const cardsets = require('../routes/cardsets');
+const cards = require('../routes/cards');
 
 /*
 const customers = require('../routes/customers');
@@ -13,7 +13,7 @@ const error = require('../middleware/error');
 
 module.exports = function(app) {
     app.use(express.json());
-    app.use('/api/cardsets', cardsets);
+    app.use('/api/cards', cards);
     /*
     app.use('/api/customers', customers);
     app.use('/api/movies', movies);
