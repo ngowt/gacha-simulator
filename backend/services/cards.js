@@ -9,7 +9,7 @@ async function getCardList() {
             return result.data.card_set.card_list; 
         });
         const cardList = await Promise.all(pCardList);
-        return cardList.reduce( (a, b) => { return a.concat(b) });
+        return cardList.reduce((a, b) => { return a.concat(b) });
     } catch(ex) {
         console.log(ex);
     }
