@@ -1,33 +1,28 @@
-const axios = require('axios');
 const express = require('express');
 const CardSet = require('../models/cardset');
+const getCardSet = require('../services/cardsets');
 const router = express.Router();
 
-router.get('/:id', getCardSet);
+router.get('/:id', getCardSets);
 
-async function getCardSet(req, res) {
+async function getCardSets(req, res) {
     try {
-        let cardset = await CardSet.findOne({
-            cardset_id: req.params.id
-        });
-        if (!cardset) {
-            let result = await axios.get(`https://playartifact.com/cardset/${req.params.id}/`);
-            result.data.cardset_id = req.params.id;
-            cardSet = new CardSet(result.data);
+        let cardSet = await CardSet.findOne({ cardset_id: req.params.id });
+        if (!cardSet) {
+            const res = await getCardSet(req.params.id);
+            cardSet = new CardSet(res);
             await cardSet.save();
-        } else {
-            if (Date.now() >= new Date(cardset.expire_time * 1000)) {
-                let result = await axios.get(`https://playartifact.com/cardset/${req.params.id}/`);
-                result.data.cardset_id = req.params.id;
-                cardSet = new CardSet(result.data);
-                await CardSet.updateOne({ cardset_id: req.params.id }, {
-                    $set: {
-                        cdn_root: cardSet.cdn_root,
-                        url: cardSet.url,
-                        expire_time: cardSet.expire_time
-                    }
-                }, { new: true});
-            }
+        }
+        if (Date.now() >= new Date(cardSet.expire_time * 1000)) {
+            const res = await getCardSet(req.params.id);
+            cardSet = new CardSet(res);
+            await CardSet.updateOne({ cardset_id: req.params.id }, {
+                $set: {
+                    cdn_root: cardSet.cdn_root,
+                    url: cardSet.url,
+                    expire_time: cardSet.expire_time
+                }
+            }, { new: true});
         }
         return res.status(200).send(cardSet);
     } catch (error) {
