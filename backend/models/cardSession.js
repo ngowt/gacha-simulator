@@ -82,7 +82,7 @@ cardSessionSchema.methods.startOpenSession = async function() {
     for (let i = 0; i < this.commons_per_pack + this.rares_per_pack; i++) {
         this.current_session.cards.push(validCards[Math.floor(Math.random() * (validCards.length))]);
     }
-    return this.current_session.cards;
+    return this;
 }
 
 const CardSession = mongoose.model('cardSession', cardSessionSchema);
