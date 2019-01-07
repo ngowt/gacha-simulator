@@ -79,7 +79,7 @@ cardSessionSchema.methods.startOpenSession = async function() {
         this.current_session.cards.push(items[Math.floor(Math.random() * (items.length))]);
     }
 
-    for (let i = 0; i < this.commons_per_pack; i++) {
+    for (let i = 0; i < this.commons_per_pack + this.rares_per_pack; i++) {
         this.current_session.cards.push(validCards[Math.floor(Math.random() * (validCards.length))]);
     }
     return this.current_session.cards;
