@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Card = mongoose.model('card', mongoose.Schema(
+const cardSchema = mongoose.Schema(
     {
         card_id: {
             type: Number
@@ -36,6 +36,6 @@ const Card = mongoose.model('card', mongoose.Schema(
             }
         }
     }
-));
-
-module.exports = Card;
+);
+const Card = mongoose.model('card', cardSchema);
+module.exports = { cardSchema, Card };
