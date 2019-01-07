@@ -2,6 +2,34 @@ const axios = require('axios');
 const Card = require('../models/card');
 const CardSet = require('../models/cardset');
 
+// Probably should not do a DB call each time we want to get a random card, 
+// instead should probably call getHeroList and perform the necessary random operations on that array N number of times
+
+async function getRandomHero() {
+    const result = await getHeroList();
+    const heroCards = result.filter(el => el.card_type === "Hero");
+    return heroCards[Math.floor(Math.random() * (heroCards.length))];
+}
+
+async function getHeroList() {
+    const result = await getCardList();
+    return result.filter(el => el.card_type === "Hero");
+}
+
+// Probably should not do a DB call each time we want to get a random card, 
+// instead should probably call getHeroList and perform the necessary random operations on that array N number of times
+
+async function getRandomItem() {
+    const result = await getItemList();
+    const itemCards = result.filter(el => el.card_type === "Item");
+    return itemCards[Math.floor(Math.random() * (itemCards.length))];
+}
+
+async function getItemList() {
+    const result = await getCardList();
+    return result.filter(el => el.card_type === "Item");
+}
+
 async function getCardList() {
     try {
         const setIds = ["00", "01"];
@@ -47,4 +75,4 @@ async function getCardSet(id) {
     }
 }
 
-module.exports = getCardList;
+module.exports = { getCardList, getItemList, getRandomItem, getHeroList, getRandomHero };
