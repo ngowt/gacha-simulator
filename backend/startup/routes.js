@@ -1,5 +1,6 @@
 const express = require('express');
 const cards = require('../routes/cards');
+const play = require('../routes/play');
 
 /*
 const customers = require('../routes/customers');
@@ -14,6 +15,7 @@ const error = require('../middleware/error');
 module.exports = function(app) {
     app.use(express.json());
     app.use('/api/cards', cards);
+    app.use('/api/play', play);
     /*
     app.use('/api/customers', customers);
     app.use('/api/movies', movies);
