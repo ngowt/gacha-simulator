@@ -5,10 +5,9 @@ const router = express.Router();
 router.get('/', startNewSession);
 
 async function startNewSession(req, res) {
-    const cardSession = new CardSession();
-    const cards = await cardSession.startOpenSession();
-    if (!cards) { return res.status(404).send("Unable to retrieve cards") };
-    return res.status(200).send(cards);
+    const session = await CardSession().startOpenSession();
+    if (!session) { return res.status(404).send("Unable to retrieve cards") };
+    return res.status(200).send(session);
 }
 
 module.exports = router;
