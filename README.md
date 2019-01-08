@@ -9,7 +9,7 @@ All the fun of opening artifact card packs without the money
   - 12 cards (6x2)
   - Open new pack button
   - Start over button
-- Ongoing Session
+- Session Summary
   - Total spent
   - No. rares obtained
   - No. uncommons obtained
@@ -30,7 +30,8 @@ All the fun of opening artifact card packs without the money
 - Buttons?
 
 # Backend
-## Opening Session 
+## Opening Session
+- ~$2.69 CAD per session~
 - ~12 cards~
 - 1 Rare (Unable to determine card rarity from API, will need to do a rarity mapper in DB)
 - 3 Uncommon (Unable to determine card rarity from API, will need to do a rarity mapper in DB)
@@ -39,13 +40,13 @@ All the fun of opening artifact card packs without the money
 - ~2 Item cards~
 - Commons and uncommons have a 5% chance to upgrade to next tier (Unable to determine card rarity from API, will need to do a rarity mapper in DB)
 
-## Ongoing Session
-- $2.69 CAD per pack
-- No. Packs opened
-- Total money spent
-- List of cards obtained
+## Session Summary
+- ~No. Packs opened~
+- ~Total money spent~
+- ~List of cards obtained~
+- Implementation
 
-## Profiles
-- Base account (5 packs)
-- Fully leveled account (5 +15 packs)
+## ~Profiles~
+- ~Base account (5 packs)~
+- ~Fully leveled account (5 +15 packs)~
 
