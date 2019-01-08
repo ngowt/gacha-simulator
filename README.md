@@ -1,16 +1,21 @@
 # artifact-gacha
 All the fun of opening artifact card packs without the money
 
-## TODO
-Opening Session   
-- 12 cards
-  - 1 Rare
-  - 3 Uncommon
-  - 8 Common
-  - 1 Hero card
-  - 2 Item cards
-  - Commons and uncommons have a 5% chance to upgrade to next tier
-  - $2.69 CAD per pack
+# TODO
+
+##Frontend
+???
+
+##Backend
+##Opening Session 
+1. 12 cards
+1. 1 Rare
+1. 3 Uncommon
+1. 8 Common
+1. 1 Hero card
+1. 2 Item cards
+1. Commons and uncommons have a 5% chance to upgrade to next tier
+1. $2.69 CAD per pack
 
 Concurrent Session
 - No. Packs opened
