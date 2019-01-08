@@ -45,7 +45,7 @@ All the fun of opening artifact card packs without the money
 - Total money spent
 - List of cards obtained
 
-## Profiles
-- Base account (5 packs)
-- Fully leveled account (5 +15 packs)
+## ~Profiles~
+- ~Base account (5 packs)~
+- ~Fully leveled account (5 +15 packs)~
 
