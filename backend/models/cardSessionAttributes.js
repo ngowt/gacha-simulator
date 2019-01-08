@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const cardSessionAttributesSchema = mongoose.Schema(
     {
+        cost_per_session: {
+            type: Number,
+            default: 2.69
+        },
         cards_per_session: {
             type: Number,
             default: 12
