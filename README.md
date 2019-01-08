@@ -9,7 +9,7 @@ All the fun of opening artifact card packs without the money
   - 12 cards (6x2)
   - Open new pack button
   - Start over button
-- Ongoing Session
+- Session Summary
   - Total spent
   - No. rares obtained
   - No. uncommons obtained
@@ -44,6 +44,7 @@ All the fun of opening artifact card packs without the money
 - ~No. Packs opened~
 - ~Total money spent~
 - ~List of cards obtained~
+- Implementation
 
 ## ~Profiles~
 - ~Base account (5 packs)~
