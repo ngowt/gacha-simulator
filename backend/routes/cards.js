@@ -1,10 +1,11 @@
 const express = require('express');
 const { getCardList, getItemList, getHeroList } = require('../services/cards');
+const asyncAwaitMiddleware = require('../middleware/asyncAwait');
 const router = express.Router();
 
-router.get('/', getAllCards);
-router.get('/items/', getAllItemCards);
-router.get('/heroes/', getAllHeroCards);
+router.get('/', asyncAwaitMiddleware(getAllCards));
+router.get('/items/', asyncAwaitMiddleware(getAllItemCards));
+router.get('/heroes/', asyncAwaitMiddleware(getAllHeroCards));
 
 async function getAllCards(req, res) {
     const result = await getCardList();

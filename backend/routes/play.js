@@ -1,8 +1,9 @@
 const express = require('express');
 const CardSession = require('../models/cardSession');
+const asyncAwaitMiddleware = require('../middleware/asyncAwait');
 const router = express.Router();
 
-router.get('/', startNewSession);
+router.post('/', asyncAwaitMiddleware(startNewSession));
 
 async function startNewSession(req, res) {
     const session = await CardSession().startOpenSession();
