@@ -1,88 +1,68 @@
 const mongoose = require('mongoose');
 const { cardSchema } = require('./card');
+const CardSessionAttributes = require('./cardSessionAttributes');
 const { getCardList } = require('../services/cards');
 
 const cardSessionSchema = mongoose.Schema(
     {
-        cards_per_pack: {
+        num_commons: {
             type: Number,
-            default: 12
+            default: 0
         },
-        commons_per_pack: {
+        num_uncommons: {
             type: Number,
-            default: 8
+            default: 0
         },
-        uncommons_per_pack: {
+        num_rares: {
             type: Number,
-            default: 3
+            default: 0
         },
-        rares_per_pack: {
+        num_items: {
             type: Number,
-            default: 1
+            default: 0
         },
-        heroes_per_pack: {
+        num_heroes: {
             type: Number,
-            default: 1
+            default: 0
         },
-        items_per_pack: {
-            type: Number,
-            default: 2
-        },
-        current_session: {
-            // num_packs_opened should not be an instance, since it accumulates
-            num_packs_opened: {
-                type: Number,
-                default: 0
-            },
-            // total_money_spent should not be an instance, since it accumulates
-            total_money_spent: {
-                type: Number,
-                default: 0
-            },
-            num_commons: {
-                type: Number,
-                default: 0
-            },
-            num_uncommons: {
-                type: Number,
-                default: 0
-            },
-            num_rares: {
-                type: Number,
-                default: 0
-            },
-            num_items: {
-                type: Number,
-                default: 0
-            },
-            num_heroes: {
-                type: Number,
-                default: 0
-            },
-            cards: {
-                type: [cardSchema]
-            }
+        cards: {
+            type: [cardSchema]
         }
     }
 )
-cardSessionSchema.methods.startOpenSession = async function() {
-    const result = await getCardList();
-    const validCards = result.filter(el => el.card_type !== "Stronghold" && el.card_type !== "Pathing"); 
-    const heroes = validCards.filter(el => el.card_type === "Hero");
-    const items = validCards.filter(el => el.card_type === "Item");
-    
-    for (let i = 0; i < this.heroes_per_pack; i++) {
-        this.current_session.cards.push(heroes[Math.floor(Math.random() * (heroes.length))]);
-    }
-    
-    for (let i = 0; i < this.items_per_pack; i++) {
-        this.current_session.cards.push(items[Math.floor(Math.random() * (items.length))]);
-    }
+cardSessionSchema.methods.tallySession = function() {
+    this.cards.forEach( el => {
+        if (el.card_type === "Hero") { this.num_heroes++ }
+        else if (el.card_type === "Item") { this.num_items++ };
+    })
+}
 
-    for (let i = 0; i < this.commons_per_pack + this.rares_per_pack; i++) {
-        this.current_session.cards.push(validCards[Math.floor(Math.random() * (validCards.length))]);
+cardSessionSchema.methods.startOpenSession = async function() {
+    try {
+        const cardSessionAttributes = new CardSessionAttributes();
+        const result = await getCardList();
+        const validCards = result.filter(el => el.card_type !== "Stronghold" && el.card_type !== "Pathing"); 
+        const heroes = validCards.filter(el => el.card_type === "Hero");
+        const items = validCards.filter(el => el.card_type === "Item");
+        const allOtherCards = validCards.filter(el => el.card_type !== "Hero" && el.card_type !== "Item");
+        
+        for (let i = 0; i < cardSessionAttributes.heroes_per_session; i++) {
+            this.cards.push(heroes[Math.floor(Math.random() * (heroes.length))]);
+        }
+        
+        for (let i = 0; i < cardSessionAttributes.items_per_session; i++) {
+            this.cards.push(items[Math.floor(Math.random() * (items.length))]);
+        }
+
+        for (let i = 0; i < cardSessionAttributes.commons_per_session + cardSessionAttributes.rares_per_session; i++) {
+            this.cards.push(allOtherCards[Math.floor(Math.random() * (allOtherCards.length))]);
+        }
+
+        this.tallySession();
+        return this;
+    } catch (error) {
+        console.log(error);
     }
-    return this;
 }
 
 const CardSession = mongoose.model('cardSession', cardSessionSchema);
