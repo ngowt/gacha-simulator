@@ -63,7 +63,9 @@ cardSessionSchema.methods.tallySession = function() {
     const updatedValue = !!acc[type] ? acc[type] + 1 : 1;
     return { ...acc, [type]: updatedValue };
   };
-  return this.cards.reduce(cardTypes, {});
+  const cardTypeCounts = this.cards.reduce(cardTypes, {});
+  this.num_items = cardTypeCounts.Item;
+  this.num_heroes = cardTypeCounts.Hero;
 };
 
 cardSessionSchema.methods.startOpenSession = async function() {
@@ -76,7 +78,6 @@ cardSessionSchema.methods.startOpenSession = async function() {
     } = CardSessionAttributes;
 
     const others_per_session = commons_per_session + rares_per_session;
-
     const result = await getCardList();
     const cardsByType = result.reduce(groupByType, {});
     this.cards = [
