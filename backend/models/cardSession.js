@@ -73,7 +73,7 @@ cardSessionSchema.methods.startOpenSession = async function() {
       items_per_session,
       commons_per_session,
       rares_per_session
-    } = new CardSessionAttributes();
+    } = CardSessionAttributes;
 
     const others_per_session = commons_per_session + rares_per_session;
 
