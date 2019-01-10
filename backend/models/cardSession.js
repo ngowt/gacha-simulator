@@ -18,14 +18,23 @@ const pluckCards = (cards, length) =>
 
 const groupByType = (acc, card) => {
   const { card_type: type } = card;
+  const {
+    Hero = [],
+    Item = [],
+    Pathing = [],
+    Stronghold = [],
+    Other = []
+  } = acc;
 
-  if (KNOWN_CARD_TYPES[type] === undefined)
-    return {
-      ...acc,
-      [KNOWN_CARD_TYPES.OTHER]: [...acc[KNOWN_CARD_TYPES.OTHER], card]
-    };
-
-  return { ...acc, [type]: [...acc[type], card] };
+  return !!KNOWN_CARD_TYPES[type]
+    ? {
+        ...acc,
+        Other: [...acc.Other, card]
+      }
+    : {
+        ...acc,
+        [type]: [...acc[type], card]
+      };
 };
 
 const cardSessionSchema = mongoose.Schema({
@@ -55,10 +64,11 @@ const cardSessionSchema = mongoose.Schema({
 });
 
 cardSessionSchema.methods.tallySession = function() {
-  const cardTypes = (acc, card) => ({
-    ...acc,
-    [card.type]: acc[card.type] + 1
-  });
+  const cardTypes = (acc, card) => {
+    const { card_type: type } = card;
+    const updatedValue = !!acc[type] ? acc[type] + 1 : 1;
+    return { ...acc, [type]: updatedValue };
+  };
 
   return this.cards.reduce(cardTypes, {});
 };
