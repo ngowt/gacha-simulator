@@ -4,25 +4,27 @@ const CardSessionAttributes = require("./cardSessionAttributes");
 const { getCardList } = require("../services/cards");
 
 const KNOWN_CARD_TYPES = {
-  HERO: "Hero",
-  ITEM: "Item",
-  PATHING: "Pathing",
-  STRONGHOLD: "Stronghold",
-  OTHER: "Other"
+  Hero: "Hero",
+  Item: "Item",
+  Pathing: "Pathing",
+  Stronghold: "Stronghold",
+  Other: "Other"
 };
 
 const get_random = max => Math.floor(Math.random() * max);
 
-const pluckCards = (cards, length) =>
-  Array.from({ length }, get_random(cards.length)).map(id => cards[id]);
+const pluckCards = (cards, length) => {
+  return Array.from({ length }, () => get_random(cards.length)).map(
+    id => cards[id]
+  );
+};
 
 const groupByType = (acc, card) => {
   const { card_type } = card;
-  const currentItems = !!acc[type] ? acc[type] : [];
   const type = !!KNOWN_CARD_TYPES[card_type]
     ? card_type
-    : KNOWN_CARD_TYPES.OTHER;
-
+    : KNOWN_CARD_TYPES.Other;
+  const currentItems = !!acc[type] ? acc[type] : [];
   return {
     ...acc,
     [type]: [...currentItems, card]
@@ -61,7 +63,6 @@ cardSessionSchema.methods.tallySession = function() {
     const updatedValue = !!acc[type] ? acc[type] + 1 : 1;
     return { ...acc, [type]: updatedValue };
   };
-
   return this.cards.reduce(cardTypes, {});
 };
 
@@ -74,17 +75,16 @@ cardSessionSchema.methods.startOpenSession = async function() {
       rares_per_session
     } = new CardSessionAttributes();
 
+    console.log(heroes_per_session);
     const others_per_session = commons_per_session + rares_per_session;
 
     const result = await getCardList();
     const cardsByType = result.reduce(groupByType, {});
-
     this.cards = [
-      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.HERO], heroes_per_session),
-      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.ITEM], items_per_session),
-      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.OTHER], others_per_session)
+      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.Hero], heroes_per_session),
+      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.Item], items_per_session),
+      ...pluckCards(cardsByType[KNOWN_CARD_TYPES.Other], others_per_session)
     ];
-
     this.tallySession();
     return this;
   } catch (error) {
