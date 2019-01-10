@@ -17,24 +17,16 @@ const pluckCards = (cards, length) =>
   Array.from({ length }, get_random(cards.length)).map(id => cards[id]);
 
 const groupByType = (acc, card) => {
-  const { card_type: type } = card;
-  const {
-    Hero = [],
-    Item = [],
-    Pathing = [],
-    Stronghold = [],
-    Other = []
-  } = acc;
+  const { card_type } = card;
+  const currentItems = !!acc[type] ? acc[type] : [];
+  const type = !!KNOWN_CARD_TYPES[card_type]
+    ? card_type
+    : KNOWN_CARD_TYPES.OTHER;
 
-  return !!KNOWN_CARD_TYPES[type]
-    ? {
-        ...acc,
-        Other: [...acc.Other, card]
-      }
-    : {
-        ...acc,
-        [type]: [...acc[type], card]
-      };
+  return {
+    ...acc,
+    [type]: [...currentItems, card]
+  };
 };
 
 const cardSessionSchema = mongoose.Schema({
