@@ -75,7 +75,6 @@ cardSessionSchema.methods.startOpenSession = async function() {
       rares_per_session
     } = new CardSessionAttributes();
 
-    console.log(heroes_per_session);
     const others_per_session = commons_per_session + rares_per_session;
 
     const result = await getCardList();
