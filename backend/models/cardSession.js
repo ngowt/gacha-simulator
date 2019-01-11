@@ -11,19 +11,17 @@ const KNOWN_CARD_TYPES = {
   Other: "Other"
 };
 
-const get_random = max => Math.floor(Math.random() * max);
+const getRandom = max => Math.floor(Math.random() * max);
 
 const pluckCards = (cards, length) => {
-  return Array.from({ length }, () => get_random(cards.length)).map(
+  return Array.from({ length }, () => getRandom(cards.length)).map(
     id => cards[id]
   );
 };
 
 const groupByType = (acc, card) => {
   const { card_type } = card;
-  const type = !!KNOWN_CARD_TYPES[card_type]
-    ? card_type
-    : KNOWN_CARD_TYPES.Other;
+  const type = !!KNOWN_CARD_TYPES[card_type] ? card_type : KNOWN_CARD_TYPES.Other;
   const currentItems = !!acc[type] ? acc[type] : [];
   return {
     ...acc,
@@ -61,7 +59,10 @@ cardSessionSchema.methods.tallySession = function() {
   const cardTypes = (acc, card) => {
     const { card_type: type } = card;
     const updatedValue = !!acc[type] ? acc[type] + 1 : 1;
-    return { ...acc, [type]: updatedValue };
+    return { 
+      ...acc, 
+      [type]: updatedValue 
+    };
   };
   const cardTypeCounts = this.cards.reduce(cardTypes, {});
   this.num_items = cardTypeCounts.Item;
