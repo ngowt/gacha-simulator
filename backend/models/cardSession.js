@@ -14,9 +14,7 @@ const KNOWN_CARD_TYPES = {
 const getRandom = max => Math.floor(Math.random() * max);
 
 const pluckCards = (cards, length) => {
-  return Array.from({ length }, () => getRandom(cards.length)).map(
-    id => cards[id]
-  );
+  return Array.from({ length }, () => getRandom(cards.length)).map(id => cards[id]);
 };
 
 const groupByType = (acc, card) => {
