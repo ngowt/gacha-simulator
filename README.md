@@ -50,3 +50,6 @@ All the fun of opening artifact card packs without the money (Currently on hold,
 - ~Base account (5 packs)~
 - ~Fully leveled account (5 +15 packs)~
 
+# Test
+## Frontend
+## Backend
