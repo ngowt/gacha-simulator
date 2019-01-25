@@ -16,10 +16,13 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        <Board
-          onDraft={this.onDraftHandler}
-          sessionSummary={this.state.sessionSummary}
-        />
+        <div className="ui container">
+          <button onClick={this.onDraftHandler} className="ui basic button">
+            <i className="icon user" />
+            Draft
+          </button>
+        </div>
+        <Board sessionSummary={this.state.sessionSummary} />
       </div>
     );
   }
