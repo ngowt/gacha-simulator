@@ -1,16 +1,12 @@
 import React from "react";
 import { Card } from "./Card";
 
-export class Board extends React.Component {
-  onDraftHandler = () => {
-    this.props.onDraft();
-  };
-
-  cardListRenderer = () => {
-    if (!this.props.sessionSummary) {
+export const Board = props => {
+  const cardListRenderer = () => {
+    if (!props.sessionSummary) {
       return <div>Please draft...</div>;
     }
-    const { cards } = this.props.sessionSummary;
+    const { cards } = props.sessionSummary;
     const cardElements = cards.map(card => {
       return (
         <div className="four wide column" key={card.base_card_id}>
@@ -21,17 +17,9 @@ export class Board extends React.Component {
     return cardElements;
   };
 
-  render() {
-    return (
-      <div>
-        <div className="ui container">
-          <button onClick={this.onDraftHandler} className="ui basic button">
-            <i className="icon user" />
-            Draft
-          </button>
-        </div>
-        <div className="ui grid">{this.cardListRenderer()}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <div className="ui grid">{cardListRenderer()}</div>
+    </div>
+  );
+};
