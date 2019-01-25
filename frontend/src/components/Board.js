@@ -7,9 +7,9 @@ export const Board = props => {
       return <div>Please draft...</div>;
     }
     const { cards } = props.sessionSummary;
-    const cardElements = cards.map(card => {
+    const cardElements = cards.map((card, index) => {
       return (
-        <div className="four wide column" key={card.base_card_id}>
+        <div className="four wide column" key={`${card.base_card_id}-${index}`}>
           <Card card={card} />
         </div>
       );
