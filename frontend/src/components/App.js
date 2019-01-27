@@ -1,16 +1,33 @@
 import React from "react";
 import { Board } from "./Board";
+import { Summary } from "./Summary";
 import { Draft } from "../services/Draft";
 
 export class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sessionSummary: null };
+    this.state = { sessionSummary: null, summary: null };
   }
+
+  updateSummary = () => {
+    if (this.state.summary === null) {
+      return { ...this.state.sessionSummary, spent: 2.69 };
+    }
+    const obj = { ...this.state.summary };
+    obj.spent = obj.spent + 2.69;
+    obj.num_commons += this.state.sessionSummary.num_commons;
+    obj.num_uncommons += this.state.sessionSummary.num_uncommons;
+    obj.num_rares += this.state.sessionSummary.num_rares;
+    obj.num_items += this.state.sessionSummary.num_items;
+    obj.num_heroes += this.state.sessionSummary.num_heroes;
+    obj.cards = [...obj.cards, ...this.state.sessionSummary.cards];
+    return obj;
+  };
 
   onDraftHandler = async () => {
     const response = await Draft.post("/play");
     this.setState({ sessionSummary: response.data });
+    this.setState({ summary: this.updateSummary() });
   };
 
   render() {
@@ -29,7 +46,7 @@ export class App extends React.Component {
           </div>
         </div>
         <div className="stretched four wide column">
-          <div className="ui placeholder segment" />
+          <Summary summary={this.state.summary} />
         </div>
         <div className="twelve wide column">
           <div className="row">
