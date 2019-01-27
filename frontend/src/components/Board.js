@@ -7,19 +7,29 @@ export const Board = props => {
       return <div>Please draft...</div>;
     }
     const { cards } = props.sessionSummary;
-    const cardElements = cards.map((card, index) => {
+    const row1Cards = cards.slice(0, 6);
+    const row2Cards = cards.slice(6);
+    const row1 = row1Cards.map((card, index) => {
       return (
-        <div className="four wide column" key={`${card.base_card_id}-${index}`}>
+        <div className="column" key={`${card.base_card_id}-${index}`}>
           <Card card={card} />
         </div>
       );
     });
-    return cardElements;
+    const row2 = row2Cards.map((card, index) => {
+      return (
+        <div className="column" key={`${card.base_card_id}-${index + 6}`}>
+          <Card card={card} />
+        </div>
+      );
+    });
+    return (
+      <div className="ui celled grid">
+        <div className="six column row">{row1}</div>
+        <div className="six column row">{row2}</div>
+      </div>
+    );
   };
 
-  return (
-    <div>
-      <div className="ui grid">{cardListRenderer()}</div>
-    </div>
-  );
+  return cardListRenderer();
 };
