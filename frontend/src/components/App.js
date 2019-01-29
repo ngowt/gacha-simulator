@@ -24,12 +24,12 @@ export class App extends React.Component {
     return obj;
   };
 
-  onResetHandler = () => {
+  handleReset = () => {
     this.setState({ sessionSummary: null });
     this.setState({ summary: null });
   };
 
-  onDraftHandler = async () => {
+  handleDraft = async () => {
     const response = await Draft.post("/play");
     this.setState({ sessionSummary: response.data });
     this.setState({ summary: this.updateSummary() });
@@ -41,7 +41,7 @@ export class App extends React.Component {
         <div className="row">
           <div className="sixteen wide column">
             <button
-              onClick={this.onDraftHandler}
+              onClick={this.handleDraft}
               className="ui basic button"
               style={{ width: "100%" }}
             >
@@ -61,7 +61,7 @@ export class App extends React.Component {
         <div className="row">
           <div className="sixteen wide column">
             <button
-              onClick={this.onResetHandler}
+              onClick={this.handleReset}
               className="ui basic button"
               style={{ width: "100%" }}
             >
