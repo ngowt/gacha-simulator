@@ -1,5 +1,5 @@
 # artifact-gacha
-All the fun of opening artifact card packs without the money (Currently on hold, need to learn ReactJS first)
+All the fun of opening artifact card packs without the money
 
 # TODO
 
