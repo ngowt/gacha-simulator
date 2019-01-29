@@ -1,21 +1,21 @@
 # artifact-gacha
-All the fun of opening artifact card packs without the money (Currently on hold, need to learn ReactJS first)
+All the fun of opening artifact card packs without the money
 
 # TODO
 
-# Frontend (To be done in ReactJS)
+# Frontend
 ## User Interface
 - Opening Session
-  - ~12 cards (6x2)~ (Done kinda?)
+  - ~12 cards (6x2)~
   - ~Open new pack button~
-  - Start over button
+  - ~Start over button~
 - Session Summary
-  - Total spent
+  - ~Total spent~
   - No. rares obtained
   - No. uncommons obtained
   - No. commons obtained
-  - No. items obtained
-  - No. heroes obtained
+  - ~No. items obtained~
+  - ~No. heroes obtained~
   - Expected value?
   - List of cards obtained
 ## Animations
