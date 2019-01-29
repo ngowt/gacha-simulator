@@ -3,7 +3,7 @@ All the fun of opening artifact card packs without the money
 
 # TODO
 
-# Frontend (To be done in ReactJS)
+# Frontend
 ## User Interface
 - Opening Session
   - ~12 cards (6x2)~
