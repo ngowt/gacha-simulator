@@ -1,6 +1,8 @@
 # artifact-gacha
 All the fun of opening artifact card packs without the money
 
+[![Image from Imgur](https://i.imgur.com/blGsfzs.jpg)](https://i.imgur.com/blGsfzs.jpgs)
+
 # TODO
 
 # Frontend
