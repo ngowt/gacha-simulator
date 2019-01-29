@@ -24,6 +24,11 @@ export class App extends React.Component {
     return obj;
   };
 
+  onResetHandler = () => {
+    this.setState({ sessionSummary: null });
+    this.setState({ summary: null });
+  };
+
   onDraftHandler = async () => {
     const response = await Draft.post("/play");
     this.setState({ sessionSummary: response.data });
@@ -51,6 +56,18 @@ export class App extends React.Component {
         <div className="twelve wide column">
           <div className="row">
             <Board sessionSummary={this.state.sessionSummary} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="sixteen wide column">
+            <button
+              onClick={this.onResetHandler}
+              className="ui basic button"
+              style={{ width: "100%" }}
+            >
+              <i className="icon sync" />
+              Start Over
+            </button>
           </div>
         </div>
       </div>
