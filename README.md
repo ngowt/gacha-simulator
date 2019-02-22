@@ -1,5 +1,5 @@
-# artifact-gacha
-All the fun of opening artifact card packs without the money
+# gacha-simulator
+A case study providing insight into Expected Value vs. Market Value from purchasing "Loot Boxes". Currently only supports Valve's [**Artifact**](https://playartifact.com/)
 
 [![Image from Imgur](https://i.imgur.com/blGsfzs.jpg)](https://i.imgur.com/blGsfzs.jpgs)
 
